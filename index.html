@@ -3,51 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>หน้าแรก | Ranprajam burger</title>
+  <meta name="robots" content="noindex">
+  <title>แอดมิน | Ranprajam burger</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="icon" type="image/png" href="../images/logo.png">
   <meta name="theme-color" content="#FFCA02">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
   <nav class="nav">
-    <a class="brand" href="index.html" aria-label="หน้าแรก"><img src="images/logo.png" alt="" width="38" height="38"></a>
-    <a href="index.html" class="active">หน้าแรก</a>
-    <a href="menu.html">เมนู</a>
-    <a href="about.html">เกี่ยวกับร้าน</a>
-    <a href="customer.html">สะสมคะแนน</a>
+    <a class="brand" href="../index.html" aria-label="หน้าแรก"><img src="../images/logo.png" alt="" width="38" height="38"></a>
+    <a href="../index.html">หน้าแรก</a>
+    <a href="../menu.html">เมนู</a>
+    <a href="../about.html">เกี่ยวกับร้าน</a>
+    <a href="../customer.html#check" data-nav="check">เช็คคะแนน</a>
+    <a href="../customer.html#register" data-nav="register">สมัครสมาชิก</a>
+    <a class="admin-link active" href="../admin/index.html">เข้าสู่ระบบ (admin)</a>
   </nav>
 
-  <main class="container">
-    <header class="hero">
-      <img class="logo" src="images/logo.png" alt="โลโก้ Ranprajam burger" width="112" height="112">
-      <h1>Ranprajam burger</h1>
-      <p class="muted">เบอร์เกอร์ทำสดใหม่ทุกชิ้น</p>
-    </header>
-
-    <section class="banner promo" aria-label="โปรโมชั่น">
-      <span class="banner-tag">โปรโมชั่น</span>
-      <h2>ซื้อครบ 100 บาท รับ 10 คะแนน</h2>
-      <p>สะสมให้ครบ 100 คะแนนรับบัตร Classic, 200 รับ Silver, 300 รับ Gold</p>
-      <p><a href="customer.html">เช็คคะแนนของฉัน</a></p>
+  <main class="container wide">
+    <section id="login" class="card hidden" style="max-width:420px;margin:0 auto 16px">
+      <h1>เข้าสู่ระบบแอดมิน</h1>
+      <form id="login-form">
+        <input id="email" type="email" placeholder="อีเมล" autocomplete="username" required>
+        <input id="password" type="password" placeholder="รหัสผ่าน" autocomplete="current-password" required>
+        <button class="btn" type="submit">เข้าสู่ระบบ</button>
+      </form>
     </section>
 
-    <section class="banner place" aria-label="พิกัดร้าน">
-      <span class="banner-tag">พิกัดร้าน</span>
-      <h2>มาหาเราได้ที่นี่</h2>
-      <p>123 ถนนตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง กรุงเทพฯ 10xxx</p>
-      <p>เปิดทุกวัน 10:00 – 21:00 น.</p>
-      <p><a href="https://maps.google.com/?q=Ranprajam+burger" target="_blank" rel="noopener">เปิดใน Google Maps</a></p>
-    </section>
+    <div id="panel" class="hidden">
+      <div class="tabs" id="tabs">
+        <button data-tab="t-receipt" class="on">ใบเสร็จ</button>
+        <button data-tab="t-members">สมาชิก</button>
+        <button data-tab="t-menu">เมนู</button>
+        <button data-tab="t-site">ข้อมูลร้าน</button>
+        <button data-tab="t-settings">ตั้งค่า</button>
+      </div>
 
-    <section class="banner contact" aria-label="ติดต่อร้าน">
-      <span class="banner-tag">ติดต่อร้าน</span>
-      <h2>โทรสั่งหรือสอบถาม</h2>
-      <p>โทร <a href="tel:0812345678">081-234-5678</a></p>
-      <p>LINE: @yourshop</p>
-    </section>
+      <div id="t-receipt" class="tab on">
+        <div class="card">
+          <h2>บันทึกใบเสร็จ</h2>
+          <form id="receipt-form">
+            <div><label for="r-phone">เบอร์โทรลูกค้า</label><input id="r-phone" type="tel" inputmode="numeric" placeholder="08x-xxx-xxxx" required></div>
+            <div><label for="r-no">เลขที่ใบเสร็จ</label><input id="r-no" type="text" required></div>
+            <div><label for="r-amount">ยอดเงิน (บาท)</label><input id="r-amount" type="number" min="1" step="0.01" inputmode="decimal" required></div>
+            <div><label for="r-date">วันที่ซื้อ</label><input id="r-date" type="date" required></div>
+            <button class="btn" type="submit">บันทึก</button>
+          </form>
+        </div>
+        <div class="card">
+          <h2>รายการของวันที่</h2>
+          <input id="list-date" type="date">
+          <p id="day-summary" class="muted"></p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>เบอร์</th><th>ชื่อ</th><th>ใบเสร็จ</th><th>ยอด</th><th>คะแนน</th></tr></thead>
+            <tbody id="day-body"></tbody>
+          </table></div>
+        </div>
+      </div>
+
+      <div id="t-members" class="tab">
+        <div class="card">
+          <h2>สมาชิก <span id="m-count" class="muted"></span></h2>
+          <input id="m-search" type="search" placeholder="ค้นหาชื่อหรือเบอร์โทร">
+          <div class="table-wrap" style="margin-top:12px"><table>
+            <thead><tr><th>ชื่อ-นามสกุล</th><th>เบอร์</th><th>คะแนน</th><th>บัตร</th><th>มาแล้ว</th><th>ล่าสุด</th><th></th></tr></thead>
+            <tbody id="m-body"></tbody>
+          </table></div>
+        </div>
+      </div>
+
+      <div id="t-menu" class="tab">
+        <div class="card">
+          <h2 id="menu-form-title">เพิ่มเมนู</h2>
+          <form id="menu-form">
+            <div><label for="mi-cat">หมวดหมู่</label><input id="mi-cat" list="cat-list" value="เบอร์เกอร์" required><datalist id="cat-list"></datalist></div>
+            <div><label for="mi-name">ชื่อเมนู</label><input id="mi-name" required></div>
+            <div><label for="mi-desc">รายละเอียด</label><input id="mi-desc"></div>
+            <div><label for="mi-price">ราคา (บาท)</label><input id="mi-price" type="number" min="0" step="0.01" required></div>
+            <div><label for="mi-sort">ลำดับแสดง (เลขน้อยขึ้นก่อน)</label><input id="mi-sort" type="number" value="0"></div>
+            <div><label for="mi-img">รูปภาพ (ย่อขนาดให้อัตโนมัติ)</label><input id="mi-img" type="file" accept="image/*"></div>
+            <label class="check"><input id="mi-avail" type="checkbox" checked><span>แสดงในหน้าเมนู</span></label>
+            <button class="btn" type="submit" id="mi-submit">เพิ่มเมนู</button>
+            <button class="btn btn-outline hidden" type="button" id="mi-cancel">ยกเลิกการแก้ไข</button>
+          </form>
+        </div>
+        <div class="card"><h2>รายการเมนู</h2><ul id="menu-admin" class="receipt-list"></ul></div>
+      </div>
+
+      <div id="t-site" class="tab">
+        <div class="card">
+          <h2>ข้อมูลร้าน และพิกัด</h2>
+          <p class="muted">แก้แล้วกดบันทึก หน้าเว็บจะเปลี่ยนทันที พิกัด: เปิด Google Maps คลิกขวาที่หมุดร้าน แล้วคลิกตัวเลขพิกัดเพื่อคัดลอก</p>
+          <form id="site-form"></form>
+        </div>
+      </div>
+
+      <div id="t-settings" class="tab">
+        <div class="card">
+          <h2>ตั้งค่าคะแนน</h2>
+          <form id="settings-form">
+            <div><label for="s-min">ยอดขั้นต่ำเพื่อรับคะแนน (บาท)</label><input id="s-min" type="number" min="1" required></div>
+            <div><label for="s-pts">คะแนนที่ได้ต่อใบเสร็จ</label><input id="s-pts" type="number" min="1" required></div>
+            <button class="btn" type="submit">บันทึกการตั้งค่า</button>
+          </form>
+        </div>
+        <div class="card">
+          <h2>ประเภทบัตร</h2>
+          <ul id="tier-admin" class="receipt-list"></ul>
+          <form id="tier-form">
+            <div class="row"><input id="t-name" type="text" placeholder="ชื่อบัตร" required><input id="t-min" type="number" min="0" placeholder="คะแนนขั้นต่ำ" required></div>
+            <button class="btn" type="submit">เพิ่มประเภทบัตร</button>
+          </form>
+        </div>
+        <div id="main-admin-card" class="card hidden">
+          <h2>เพิ่มแอดมิน</h2>
+          <p class="muted">สร้างผู้ใช้ใน Supabase Authentication ก่อน (Add user > Create new user) แล้วกรอกอีเมลที่นี่</p>
+          <form id="admin-form">
+            <input id="a-email" type="email" placeholder="อีเมลแอดมินใหม่" required>
+            <button class="btn" type="submit">อนุญาตเป็นแอดมิน</button>
+          </form>
+        </div>
+      </div>
+
+      <button id="logout-btn" type="button" class="btn btn-outline">ออกจากระบบ</button>
+    </div>
+
+    <p id="message" class="message" role="status"></p>
   </main>
-  <footer class="muted"><small>© Ranprajam burger</small></footer>
+  <script type="module" src="../js/admin.js"></script>
 </body>
 </html>

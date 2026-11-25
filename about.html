@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>เกี่ยวกับร้าน | Ranprajam burger</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="images/logo.png">
   <meta name="theme-color" content="#FFCA02">
   <link rel="stylesheet" href="css/style.css">
+  <title>เกี่ยวกับร้าน | Ranprajam burger</title>
 </head>
 <body>
   <nav class="nav">
@@ -16,23 +16,26 @@
     <a href="index.html">หน้าแรก</a>
     <a href="menu.html">เมนู</a>
     <a href="about.html" class="active">เกี่ยวกับร้าน</a>
-    <a href="customer.html">สะสมคะแนน</a>
+    <a href="customer.html#check" data-nav="check">เช็คคะแนน</a>
+    <a href="customer.html#register" data-nav="register">สมัครสมาชิก</a>
+    <a class="admin-link" href="admin/index.html">เข้าสู่ระบบ (admin)</a>
   </nav>
-
   <main class="container">
     <h1>เกี่ยวกับร้าน</h1>
     <section class="card">
       <h2>เรื่องราวของเรา</h2>
-      <p>ใส่เรื่องราวของร้าน Ranprajam burger ที่นี่ เช่น เริ่มทำร้านเมื่อไหร่ จุดเด่นของเบอร์เกอร์ และวัตถุดิบที่เลือกใช้</p>
+      <p class="story" data-c="about_story">ใส่เรื่องราวของร้านผ่านหน้าแอดมิน</p>
     </section>
     <section class="card">
       <h2>ติดต่อและเวลาเปิด</h2>
-      <p>เปิดทุกวัน 10:00 – 21:00 น.</p>
-      <p>โทร <a href="tel:0812345678">081-234-5678</a> · LINE: @yourshop</p>
-      <p>123 ถนนตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง กรุงเทพฯ 10xxx</p>
-      <p><a href="https://maps.google.com/?q=Ranprajam+burger" target="_blank" rel="noopener">เปิดใน Google Maps</a></p>
+      <p data-c="hours">เปิดทุกวัน 10:00 – 21:00 น.</p>
+      <p>โทร <a data-c="phone" data-tel href="tel:0812345678">081-234-5678</a> · LINE: <span data-c="line_id">@yourshop</span></p>
+      <p data-c="address">123 ถนนตัวอย่าง</p>
+      <p><a data-maps href="https://maps.google.com/?q=Ranprajam+burger" target="_blank" rel="noopener">เปิดใน Google Maps</a></p>
+      <iframe id="map" class="map-frame hidden" title="แผนที่ร้าน" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
   </main>
-  <footer class="muted"><small>© Ranprajam burger</small></footer>
+  <footer class="muted"><small>© <span data-c="shop_name">Ranprajam burger</span></small></footer>
+  <script type="module">import { applyContent } from "./js/site.js"; applyContent();</script>
 </body>
 </html>

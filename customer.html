@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>สะสมคะแนน | Ranprajam burger</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="images/logo.png">
   <meta name="theme-color" content="#FFCA02">
   <link rel="stylesheet" href="css/style.css">
+  <title>สมาชิก | Ranprajam burger</title>
 </head>
 <body>
   <nav class="nav">
@@ -16,9 +16,10 @@
     <a href="index.html">หน้าแรก</a>
     <a href="menu.html">เมนู</a>
     <a href="about.html">เกี่ยวกับร้าน</a>
-    <a href="customer.html" class="active">สะสมคะแนน</a>
+    <a href="customer.html#check" data-nav="check">เช็คคะแนน</a>
+    <a href="customer.html#register" data-nav="register">สมัครสมาชิก</a>
+    <a class="admin-link" href="admin/index.html">เข้าสู่ระบบ (admin)</a>
   </nav>
-
   <main class="container">
     <section id="step-phone" class="card hidden">
       <h1>เช็คคะแนนสะสม</h1>
@@ -27,31 +28,42 @@
         <input id="phone" type="tel" inputmode="numeric" placeholder="08x-xxx-xxxx" autocomplete="tel" required>
         <button type="submit" class="btn">ดูคะแนน</button>
       </form>
+      <button id="to-register" type="button" class="link-btn">ยังไม่เป็นสมาชิก? สมัครที่นี่</button>
+    </section>
+
+    <section id="step-register" class="card hidden">
+      <h1>สมัครสมาชิก</h1>
+      <form id="register-form">
+        <div><label for="rg-first">ชื่อ</label><input id="rg-first" type="text" maxlength="60" autocomplete="given-name" required></div>
+        <div><label for="rg-last">นามสกุล</label><input id="rg-last" type="text" maxlength="60" autocomplete="family-name" required></div>
+        <div><label for="rg-phone">เบอร์โทรศัพท์</label><input id="rg-phone" type="tel" inputmode="numeric" placeholder="08x-xxx-xxxx" autocomplete="tel" required></div>
+        <label class="check"><input id="rg-consent" type="checkbox" required>
+          <span>ยินยอมให้ร้านเก็บชื่อและเบอร์โทรเพื่อใช้สะสมคะแนนเท่านั้น</span></label>
+        <button type="submit" class="btn">สมัครสมาชิก</button>
+      </form>
+      <button id="to-lookup" type="button" class="link-btn">เป็นสมาชิกแล้ว? เช็คคะแนน</button>
     </section>
 
     <section id="step-dashboard" class="hidden">
       <div class="card points-card">
-        <p class="muted">บัตรของเบอร์ <span id="shown-phone"></span></p>
+        <p class="muted" id="who"></p>
         <h2 id="tier-name">-</h2>
         <div class="points"><span id="total-points">0</span> <small>คะแนน</small></div>
         <div class="progress"><div id="progress-bar"></div></div>
         <p id="next-info" class="muted"></p>
         <ul id="tier-list" class="tier-list"></ul>
       </div>
-
       <div class="card">
         <h3>ประวัติการสะสม</h3>
         <ul id="receipt-list" class="receipt-list"></ul>
         <p id="empty-text" class="muted hidden">ยังไม่มีรายการสะสม สั่งครบ 100 บาทเพื่อรับคะแนนแรก</p>
       </div>
-
       <button id="logout-btn" type="button" class="btn btn-outline">เปลี่ยนเบอร์</button>
     </section>
 
     <p id="message" class="message" role="status"></p>
   </main>
-  <footer class="muted"><small>© Ranprajam burger</small></footer>
-
+  <footer class="muted"><small>© <span data-c="shop_name">Ranprajam burger</span></small></footer>
   <script type="module" src="js/customer.js"></script>
 </body>
 </html>
