@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>แอดมิน | Ranprajam burger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../images/logo.png">
+  <meta name="theme-color" content="#FFCA02">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="../index.html" aria-label="หน้าแรก"><img src="../images/logo.png" alt="" width="38" height="38"></a><a href="../index.html">กลับหน้าแรก</a></nav>
+
+  <main class="container wide">
+    <section id="login" class="card hidden" style="max-width:420px;margin:0 auto 16px">
+      <h1>เข้าสู่ระบบแอดมิน</h1>
+      <form id="login-form">
+        <input id="email" type="email" placeholder="อีเมล" autocomplete="username" required>
+        <input id="password" type="password" placeholder="รหัสผ่าน" autocomplete="current-password" required>
+        <button class="btn" type="submit">เข้าสู่ระบบ</button>
+      </form>
+    </section>
+
+    <div id="panel" class="hidden">
+      <div class="card">
+        <h2>บันทึกใบเสร็จ</h2>
+        <form id="receipt-form">
+          <div><label for="r-phone">เบอร์โทรลูกค้า</label>
+            <input id="r-phone" type="tel" inputmode="numeric" placeholder="08x-xxx-xxxx" required></div>
+          <div><label for="r-no">เลขที่ใบเสร็จ</label>
+            <input id="r-no" type="text" required></div>
+          <div><label for="r-amount">ยอดเงิน (บาท)</label>
+            <input id="r-amount" type="number" min="1" step="0.01" inputmode="decimal" required></div>
+          <div><label for="r-date">วันที่ซื้อ</label>
+            <input id="r-date" type="date" required></div>
+          <button class="btn" type="submit">บันทึก</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>รายการของวันที่</h2>
+        <input id="list-date" type="date">
+        <p id="day-summary" class="muted"></p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>เบอร์</th><th>เลขที่ใบเสร็จ</th><th>ยอด</th><th>คะแนน</th></tr></thead>
+            <tbody id="day-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>ตั้งค่าคะแนน</h2>
+        <form id="settings-form">
+          <div><label for="s-min">ยอดขั้นต่ำเพื่อรับคะแนน (บาท)</label>
+            <input id="s-min" type="number" min="1" required></div>
+          <div><label for="s-pts">คะแนนที่ได้ต่อใบเสร็จ</label>
+            <input id="s-pts" type="number" min="1" required></div>
+          <button class="btn" type="submit">บันทึกการตั้งค่า</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>ประเภทบัตร</h2>
+        <ul id="tier-admin" class="receipt-list"></ul>
+        <form id="tier-form">
+          <div class="row">
+            <input id="t-name" type="text" placeholder="ชื่อบัตร" required>
+            <input id="t-min" type="number" min="0" placeholder="คะแนนขั้นต่ำ" required>
+          </div>
+          <button class="btn" type="submit">เพิ่มประเภทบัตร</button>
+        </form>
+      </div>
+
+      <div id="main-admin-card" class="card hidden">
+        <h2>เพิ่มแอดมิน</h2>
+        <p class="muted">สร้างผู้ใช้ใน Supabase Authentication ก่อน แล้วกรอกอีเมลที่นี่</p>
+        <form id="admin-form">
+          <input id="a-email" type="email" placeholder="อีเมลแอดมินใหม่" required>
+          <button class="btn" type="submit">อนุญาตเป็นแอดมิน</button>
+        </form>
+      </div>
+
+      <button id="logout-btn" type="button" class="btn btn-outline">ออกจากระบบ</button>
+    </div>
+
+    <p id="message" class="message" role="status"></p>
+  </main>
+
+  <script type="module" src="../js/admin.js"></script>
+</body>
+</html>
