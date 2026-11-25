@@ -81,3 +81,23 @@ th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);white-spac
 
 footer{text-align:center;padding:8px 16px 28px}
 @media (prefers-reduced-motion:reduce){#progress-bar{transition:none}}
+
+/* ---- เพิ่มรอบสมาชิก/เมนู/แอดมิน ---- */
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px}
+.tabs button{font:inherit;white-space:nowrap;border:2px solid var(--ink);background:transparent;color:var(--ink);padding:8px 16px;border-radius:999px;cursor:pointer;font-weight:500}
+.tabs button.on{background:var(--ink);color:var(--yellow)}
+.tab{display:none}.tab.on{display:block}
+.menu-list li{align-items:center}
+.menu-list .info{flex:1}
+.menu-list img,.thumb{width:72px;height:72px;object-fit:cover;border-radius:10px;flex:none}
+.map-frame{width:100%;height:220px;border:0;border-radius:12px;margin-top:12px}
+.story{white-space:pre-line}
+textarea{font:inherit;font-size:1.05rem;padding:12px;border:1px solid #D8C77A;border-radius:10px;width:100%;min-height:90px;background:#fff;color:var(--ink)}
+.check{display:flex;gap:10px;align-items:flex-start}
+.check input{width:auto;margin-top:5px}
+.actions{display:flex;gap:6px}
+li.item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+li.item .grow{flex:1}
+
+.nav a.admin-link{margin-left:auto;border:1.5px solid var(--ink);font-size:.85rem}
+.nav a.admin-link.active{background:var(--ink);color:var(--yellow)}
