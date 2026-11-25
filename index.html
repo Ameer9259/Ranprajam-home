@@ -9,6 +9,27 @@
   <meta name="theme-color" content="#FFCA02">
   <link rel="stylesheet" href="css/style.css">
   <title>หน้าแรก | Ranprajam burger</title>
+  <script>
+    // แสดงข้อผิดพลาดบนหน้าเว็บ ช่วยหาสาเหตุเมื่อหน้าว่างหรือโหลดไม่ขึ้น
+    (function () {
+      function show(t) {
+        var d = document.getElementById("boot-error");
+        if (!d) { d = document.createElement("div"); d.id = "boot-error"; d.setAttribute("role", "alert");
+          d.style.cssText = "background:#b3261e;color:#fff;padding:12px 16px;font:14px/1.5 sans-serif;word-break:break-word";
+          document.body.insertBefore(d, document.body.firstChild); }
+        d.textContent = t;
+      }
+      window.addEventListener("error", function (e) {
+        if (e.target && e.target.src) return show("โหลดไฟล์ไม่ได้: " + e.target.src);
+        var m = e.message || "";
+        if (/export named/i.test(m)) m += " (ชื่อตัวแปรใน js/config.js ต้องเป็น SUPABASE_URL และ SUPABASE_ANON_KEY)";
+        show("ข้อผิดพลาด: " + m + " [" + String(e.filename || "").split("/").slice(-2).join("/") + ":" + e.lineno + "]");
+      }, true);
+      window.addEventListener("unhandledrejection", function (e) {
+        show("ข้อผิดพลาด: " + (e.reason && e.reason.message ? e.reason.message : e.reason));
+      });
+    })();
+  </script>
 </head>
 <body>
   <nav class="nav">

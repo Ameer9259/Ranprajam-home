@@ -1,5 +1,4 @@
 import { supabase } from "./supabase.js";
-import { SUPABASE_URL } from "./config.js";
 
 const $ = (id) => document.getElementById(id);
 const msg = (t, type = "") => { $("message").textContent = t; $("message").className = "message " + type; };
@@ -295,10 +294,6 @@ $("admin-form").addEventListener("submit", async (e) => {
 });
 
 (async () => {
-  if (SUPABASE_URL.includes("YOUR-PROJECT")) {
-    showLogin();
-    return msg("ยังไม่ได้ตั้งค่า js/config.js (ยังเป็นค่าตัวอย่าง YOUR-PROJECT)", "error");
-  }
   const { data: { session } } = await supabase.auth.getSession();
   if (session) await enter(); else showLogin();
 })();
